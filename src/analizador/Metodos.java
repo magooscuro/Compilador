@@ -1,5 +1,7 @@
 package analizador;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import java.util.Stack;
@@ -8,7 +10,7 @@ import java.util.Stack;
  * @author luis_
  */
 public class Metodos {
-    Stack<String> pila = new Stack<String>();
+    Queue<Integer> pila=new LinkedList<>();
     public Metodos() {
         
     }
@@ -50,28 +52,53 @@ public class Metodos {
         return arreglopalabras;
     }
     
-    public boolean esPalabraReservada(String token) {
-    	int i;
-    	String reservadas[] = {"main","abstract","assert","boolean","break","byte","case","catch","char","class","const",
-        "continue","default","do","double","else","enum","extends","final","finally","float","for","goto","if",
-        "implements","import","instanceof","int","interface","long","native","new","package","private","protected",
-    	"public","return","short","static","super","switch","new","package","private","protected","synchronized","this",
-    	"throw","throws","transient","try","void","volatile","while"};
- 
-    	for(i = 0;i < reservadas.length;i++) {
-        	if(reservadas[i].equals(token)) 
-               return true;
+    public void esPalabraReservada(String token) {
+    	String reservadas[] = {"public","static", "void", "main()","int","string","bolean",
+                                "if","else","double","while","=", "+=", "-=", "+", "-", "*", "/",
+                                ">", "<", ">=", "<=","!=",";","(",")","{","}"};
+        int idtoken[] = {200,201,202,203,204,205,206,207,208,209,210,300,301,302,400,401,402,403,404,
+                        500,501,502,503,504,600,601,602,603,604};
+        
+        boolean bandera = true;
+    	for(int i = 0;i < reservadas.length;i++) {
+        	if(reservadas[i].equals(token)){
+                   
+                    agregarApila(idtoken[i]);
+                    bandera = true;
+                    break;
+                }
+                else
+                    bandera = false;
+        }//return 5;
+        
+        if(!bandera){
+            char[] palabra = token.toCharArray();
+            String inicio;
+                if(String.valueOf(palabra[0]).equals("$")){
+                    System.out.println("yaa we");
+                }
+            
         }
-    	return false;
+       
+    }
+    
+    public boolean Abcedario(String letra){
+        String abcedario[] = {"a", "b", "c", "b", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; 
+        for (int i = 0; i < abcedario.length; i++) {
+            if(letra.equalsIgnoreCase(abcedario[i]))
+                return true;
+        }
+        return false;
     }
     
     public void operaciones(String cadena){
         String[] palabras = lecturaBACKpalabras(cadena);
         for (int i = 0; i < palabras.length; i++) {
-            if(esPalabraReservada(palabras[i])){
-                System.out.println(palabras[i]+"palabra reservada");
-            }else
-                System.out.println(palabras[i]+"no palabra reserfvada");
+            esPalabraReservada(palabras[i]);
+        }
+        int tamano = pila.size();
+        for (int i = 0; i < tamano; i++) {
+            System.out.println(sacarDepila()); 
         }
         
     }
@@ -87,19 +114,16 @@ public class Metodos {
         return false;
     }
     
-    public void agregarApila(String cadena){
+    public void agregarApila(int cadena){
         // adiciona un libro a la pila
-        String[] palabras = lecturaBACKpalabras(cadena);
-        for (int i = 0; i < palabras.length; i++) {
-            pila.push(palabras[i]);
+        pila.add(cadena);
             //pila.push(Integer.toString(palabras[i]));
         }
         
         
-    }
     
-    public void sacarDEpila(){
-        while (!pila.empty())
-        System.out.println(pila.pop());
+    
+    public int sacarDepila(){
+            return pila.remove();
     }
 }
