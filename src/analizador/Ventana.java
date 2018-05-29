@@ -66,6 +66,11 @@ public class Ventana extends JFrame{
             }
         });
         vertokens.setText("ver tokens");
+        vertokens.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                vertokensActionPerformed(evt);
+            }
+        });
 
         output.setColumns(20);
         output.setRows(5);
@@ -214,6 +219,8 @@ public class Ventana extends JFrame{
         metodos.operaciones(jtxtArea.getText());
     }
     private void vertokensActionPerformed(ActionEvent evt) {
+        Token ver_tabla_tokens = new Token(this, true);
+        ver_tabla_tokens.setVisible(true);
         
     }
     public void contarFilas(){

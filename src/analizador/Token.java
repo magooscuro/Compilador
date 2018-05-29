@@ -6,10 +6,16 @@
 package analizador;
 
 import static analizador.tokens.*;
+import java.awt.Font;
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,39 +23,26 @@ import javax.swing.table.DefaultTableModel;
  * @author luis_
  */
 public class Token extends JDialog {
-    public Token(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        this.setTitle("Ver tokens");
-    }
+    JTable tabla_1 = new JTable();
+    private JScrollPane jScrollPane1;
+    private JTable tokens;
 
-    public Token(java.awt.Frame parent, boolean modal, String dirNuevo, Ventana gui) {
+    public Token(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Ver tokens");
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        setTitle("Ver tokens");
         try {
-            //gui.Guardar();
-            Process p = Runtime.getRuntime().exec("../Proyecto1.exe " + dirNuevo);
-            p.waitFor();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line = reader.readLine();
-            String el[]=line.split("-");
-            while(line!=null && el.length<2) {
-                int id=Integer.parseInt(line);
-                Object ob[]=new Object[2];
-                ob[0]=yytname[id];
-                ob[1]=yytoknum[id];
-                ((DefaultTableModel)tokens.getModel()).addRow(ob);
-                line = reader.readLine();
-                el=line.split("-");
-            }
+            //int id=Integer.parseInt(line);
+//            Object ob[]=new Object[2];
+//            ob[0]=yytname[id];
+//            ob[1]=yytoknum[id];
+            //((DefaultTableModel)tokens.getModel()).addRow(ob);
 
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
         }
     }
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
@@ -89,7 +82,31 @@ public class Token extends JDialog {
 
         pack();
     }// </editor-fold>                        
-                   
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tokens;
+    
+    
+    /*tabla_1.setBounds(600, 0, 500, 500);
+        
+        tabla_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED));
+        tabla_1.setFont(new Font("Verdana", 0, 11));
+        tabla_1.setModel(new DefaultTableModel(
+            new String [][] {
+                {"20", null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "hola", "mundo", "soy", "deadpool", "null"
+            }
+        ));
+        //tabla_1.setEnabled(false);
+        scroll.setViewportView(tabla_1);*/
 }
