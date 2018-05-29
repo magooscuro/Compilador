@@ -1,18 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package analizador;
 
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
-
+import java.util.Stack;
 /**
  *
  * @author luis_
  */
 public class Metodos {
+    Stack<String> pila = new Stack<String>();
+    public Metodos() {
+        
+    }
+    
     
     public String[] lecturaBACKpalabras(String cadena){
         /*El método toma como parámetro una expresión regular. Si se quiere utilizar un separador textual,
@@ -85,5 +85,21 @@ public class Metodos {
     public boolean esIdentificador(){
         //es palabra reservada??
         return false;
+    }
+    
+    public void agregarApila(String cadena){
+        // adiciona un libro a la pila
+        String[] palabras = lecturaBACKpalabras(cadena);
+        for (int i = 0; i < palabras.length; i++) {
+            pila.push(palabras[i]);
+            //pila.push(Integer.toString(palabras[i]));
+        }
+        
+        
+    }
+    
+    public void sacarDEpila(){
+        while (!pila.empty())
+        System.out.println(pila.pop());
     }
 }
