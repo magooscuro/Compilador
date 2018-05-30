@@ -152,7 +152,7 @@ public class Automata {
                     agregarAcola("q100");
                 else
                     if(estado.equals("q22"))
-                        agregarAcola("q23");
+                        agregarAcola("q4");
             break;
         }
         estado = pila.peek();

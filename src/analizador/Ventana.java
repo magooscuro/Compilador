@@ -217,12 +217,13 @@ public class Ventana extends JFrame{
 
     private void compilarActionPerformed(ActionEvent evt) {
         Automata a =new Automata();
+        String cadenapila="";
         int[] tokens = metodos.operaciones(entrada.getText());
         int tam = tokens.length;
         for (int i = 0; i < tam; i++) {
             a.AutomataFinito(tokens[i]);
         }
-        String cadenapila = a.mostrarpila();
+        cadenapila += a.mostrarpila();
         salidad.setText(cadenapila);
     }
     private void vertokensActionPerformed(ActionEvent evt) {
