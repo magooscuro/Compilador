@@ -117,7 +117,11 @@ public class Metodos {
                             else{
                                 System.out.println("Eror no pertenece");
                                 agregarApila(100);
+                                esIntBoolea(token);
                             }
+                        }else{
+                            esIntBoolea(token);
+                            
                         }
                     }
                 }
@@ -126,6 +130,51 @@ public class Metodos {
             bandera2=3;}
         }
        
+    }
+    
+    public boolean esIntBoolea(String token){
+        String numero[] = {"1","2","3","4","5","6","7","8","9","0"};
+        char[] numeros = token.toCharArray();
+        int bandera = 0;
+        boolean bandera2 =false;
+        int error =0;
+        
+        for (int i = 0; i < numeros.length; i++) {
+            for (int j = 0; j < numero.length; j++) {
+                if(String.valueOf(numeros[i]).equals(numero[j])){
+                    if(bandera != 5 && bandera!=3)
+                    bandera = 1;                    
+                }                
+            }
+            /*if(bandera == 0){
+                System.out.println("puede serpunto");*/
+                if(String.valueOf(numeros[i]).equals(".")){
+                    if(bandera==3){
+                        bandera=5;
+                        error = 1;
+                    }
+                    if(i<(numeros.length-1)){
+                        bandera=3;
+                    }
+                }
+                
+            }
+            
+        //}
+        if(bandera==1){
+            agregarApila(800);
+            return true;
+        }else{
+            if(bandera==3){
+                agregarApila(802);
+                return true;
+            }else{
+                if(error==1){
+                    agregarApila(100);
+                    return false;}
+            }
+        }
+        return false;
     }
     
     public boolean Abcedario(String letra){
