@@ -57,9 +57,9 @@ public class Metodos {
     public void esPalabraReservada(String token) {
     	String reservadas[] = {"public","static", "void", "main()","int","string","bolean",
                                 "if","else","double","while","=", "+=", "-=", "+", "-", "*", "/",
-                                ">", "<", ">=", "<=","!=",";","(",")","{","}"};
+                                ">", "<", ">=", "<=","!=",";","(",")","{","}",","};
         int idtoken[] = {200,201,202,203,204,205,206,207,208,209,210,300,301,302,401,402,403,404,
-                        500,501,502,503,504,600,601,602,603,604};
+                        500,501,502,503,504,600,601,602,603,604,605};
         
         boolean bandera = true;
     	for(int i = 0;i < reservadas.length;i++) {
