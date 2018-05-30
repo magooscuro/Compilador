@@ -11,6 +11,7 @@ import java.util.Stack;
  */
 public class Metodos {
     Queue<Integer> pila=new LinkedList<>();
+    int bandera2 =3;
     public Metodos() {
         
     }
@@ -107,6 +108,16 @@ public class Metodos {
                                 
                             }}
                             
+                        }
+                    }else{
+                        if(palabra.length == 1){
+                            if(Abcedario(String.valueOf(palabra[0]))){
+                                agregarApila(701);
+                            }
+                            else{
+                                System.out.println("Eror no pertenece");
+                                agregarApila(100);
+                            }
                         }
                     }
                 }
