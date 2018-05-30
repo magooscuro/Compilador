@@ -23,17 +23,16 @@ public class Token extends JDialog {
     private JScrollPane jScrollPane1;
     private JTable tokens;
     Metodos m = new Metodos();
-    String[] palabras;
     String[][] datostabla = new String[50][2];
 
     
-    public Token(Frame parent, boolean modal,int[] idtoken) {
+    public Token(Frame parent, boolean modal,int[] idtoken,String[] palabras) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Ver tokens");
         try {
-            datos();
+            datos(idtoken,palabras);
             llenarTabla();
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
@@ -79,10 +78,8 @@ public class Token extends JDialog {
         pack();
     }// </editor-fold>                        
     
-    public void datos(){
+    public void datos(int[] token, String[] palabras){
         int tamaño = m.pila.size();
-        palabras = m.lecturaBACKpalabras(v.entrada.getText());
-        int[] token = m.operaciones(v.entrada.getText());
         for (int i = 0; i < tamaño; i++) {
             datostabla[i][0] = ""+token;
             datostabla[i][1] = ""+Arrays.toString(palabras);

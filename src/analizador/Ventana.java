@@ -66,6 +66,7 @@ public class Ventana extends JFrame{
             }
         });
         vertokens.setText("ver tokens");
+        vertokens.setVisible(false);
         vertokens.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 vertokensActionPerformed(evt);
@@ -224,12 +225,19 @@ public class Ventana extends JFrame{
             a.AutomataFinito(tokens[i]);
         }
         cadenapila += a.mostrarpila();
-        salidad.setText(cadenapila);
+        if(cadenapila.equals("q100")){
+            System.out.print("LENGUAJE ACEPTADO");
+            salidad.setText(cadenapila+" > LENGUAJE ACEPTADO");
+        }else
+            salidad.setText(cadenapila+" > LENGUAJE NO ACEPTADO");
+        
     }
     private void vertokensActionPerformed(ActionEvent evt) {
-        int[] tokens = metodos.operaciones(entrada.getText());
-        Token ver_tabla_tokens = new Token(this, true,tokens);
-        ver_tabla_tokens.setVisible(true);
+//        int[] tokens = metodos.operaciones(entrada.getText());
+//        String[] palabras = metodos.lecturaBACKpalabras(entrada.getText());
+//        
+//        Token ver_tabla_tokens = new Token(this, true,tokens,palabras);
+//        ver_tabla_tokens.setVisible(true);
         
     }
     public void contarFilas(){
