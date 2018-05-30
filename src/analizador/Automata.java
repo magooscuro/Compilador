@@ -39,15 +39,33 @@ public class Automata {
             break;
             case 203://main
                 if(estado.equals("q2"))
-                    estado="q3";
+                    agregarAcola(estado="q3");
             break;
             case 603://{
                 if(estado.equals("q3"))
-                    estado="q4";
+                    agregarAcola(estado="q4");
             break;
-            case 604://}
+            
+            
+            
+            
+            case 204://int
+            case 205://string
+            case 206://boolean
+            case 209://double
                 if(estado.equals("q4"))
-                    estado="q100";
+                    agregarAcola(estado="q5");
+            break;
+            
+            
+            
+            
+            
+            
+            
+            case 604://}        ESTADO FINAL
+                if(estado.equals("q4"))
+                    agregarAcola(estado="q100");
             break;
         }
         return estado;

@@ -71,22 +71,68 @@ public class Metodos {
                     bandera = false;
         }//return 5;
         
+        
         if(!bandera){
             char[] palabra = token.toCharArray();
             String inicio;
-                if(String.valueOf(palabra[0]).equals("$")){
-                    System.out.println("yaa we");
+                if(String.valueOf(palabra[0]).equals("$")){bandera2 = 1;
+                    if(palabra.length<2){
+                        System.out.println("Error lexico Variable no esta bien definids");
+                        agregarApila(100);
+                    }else{
+                        for (int i = 1; i < palabra.length; i++) {
+                            if(!Abcedario(String.valueOf(palabra[i]))){
+                                System.out.println("Error lexico simbolo no valido");
+                                bandera2 = 0;
+                                agregarApila(100);
+                            }
+                        }
+                    }
+                }else{
+                    if(String.valueOf(palabra[0]).equals("\"")){
+                        int bandera3 = 1;
+                        for (int i = 1; i < palabra.length; i++) {
+                            if(i==(palabra.length-1))
+                            {
+                                if(String.valueOf(palabra[(palabra.length-1)]).equals("\""))
+                                    if(bandera3==1)
+                                    agregarApila(801);
+                                else
+                                    System.out.println("error");
+                            }else{
+                            if (!esString(String.valueOf(palabra[i]))){
+                                System.out.println("Error lexico simbolo no valido--"+palabra[i]);
+                                agregarApila(100);
+                                bandera3 = 0;
+                                
+                            }}
+                            
+                        }
+                    }
                 }
-            
+            if(bandera2 == 1){
+                agregarApila(700);
+            bandera2=3;}
         }
        
     }
     
     public boolean Abcedario(String letra){
-        String abcedario[] = {"a", "b", "c", "b", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; 
+        String abcedario[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; 
         for (int i = 0; i < abcedario.length; i++) {
             if(letra.equalsIgnoreCase(abcedario[i]))
                 return true;
+        }
+        return false;
+    }
+    public boolean esString(String letra){
+        String abcedario[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i",
+            "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+        "1","2","3","4","5","6","7","8","9","0","ñ","?","¿","!","¡"}; 
+        for (int i = 0; i < abcedario.length; i++) {
+            if(letra.equalsIgnoreCase(abcedario[i])){
+                return true;
+            }
         }
         return false;
     }
