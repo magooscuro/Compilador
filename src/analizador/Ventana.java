@@ -29,7 +29,7 @@ public class Ventana extends JFrame{
     private JMenuItem jMenuItem3,jMenuItem6;
     private JPanel jPanel1;
     private JScrollPane jScrollPane1,jScrollPane2,jScrollPane3;
-    private static JTextArea jtxtArea,lineCounter,output;
+    private static JTextArea entrada,lineCounter,salidad;
     private JButton compilar,vertokens;
     
     public Ventana() {
@@ -46,13 +46,13 @@ public class Ventana extends JFrame{
         compilar = new JButton();
         vertokens = new JButton();
         jScrollPane2 = new JScrollPane();
-        output = new JTextArea();
+        salidad = new JTextArea();
         jLabel2 = new JLabel();
         jScrollPane3 = new JScrollPane();
         jPanel1 = new JPanel();
         lineCounter = new JTextArea();
         jScrollPane1 = new JScrollPane();
-        jtxtArea = new JTextArea();
+        entrada = new JTextArea();
         jMenuBar1 = new JMenuBar();
         jMenu2 = new JMenu();
         jMenuItem3 = new JMenuItem();
@@ -72,11 +72,11 @@ public class Ventana extends JFrame{
             }
         });
 
-        output.setColumns(20);
-        output.setRows(5);
-        output.setDisabledTextColor(new Color(0, 0, 0));
-        output.setEnabled(false);
-        jScrollPane2.setViewportView(output);
+        salidad.setColumns(20);
+        salidad.setRows(5);
+        salidad.setDisabledTextColor(new Color(0, 0, 0));
+        salidad.setEnabled(false);
+        jScrollPane2.setViewportView(salidad);
 
         jLabel2.setText("Salida:");
 
@@ -90,10 +90,10 @@ public class Ventana extends JFrame{
         lineCounter.setCaretColor(new Color(51, 51, 255));
         lineCounter.setFocusable(false);
 
-        jtxtArea.setColumns(20);
-        jtxtArea.setLineWrap(true);
-        jtxtArea.setRows(5);
-        jtxtArea.addKeyListener(new KeyAdapter() {
+        entrada.setColumns(20);
+        entrada.setLineWrap(true);
+        entrada.setRows(5);
+        entrada.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 jtxtAreaKeyPressed(evt);
             }
@@ -101,7 +101,7 @@ public class Ventana extends JFrame{
                 jtxtAreaKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jtxtArea);
+        jScrollPane1.setViewportView(entrada);
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,7 +216,7 @@ public class Ventana extends JFrame{
     }                       
 
     private void compilarActionPerformed(ActionEvent evt) {
-        metodos.operaciones(jtxtArea.getText());
+        metodos.operaciones(entrada.getText());
     }
     private void vertokensActionPerformed(ActionEvent evt) {
         Token ver_tabla_tokens = new Token(this, true);
@@ -224,7 +224,7 @@ public class Ventana extends JFrame{
         
     }
     public void contarFilas(){
-        int totalfilas=jtxtArea.getLineCount();
+        int totalfilas=entrada.getLineCount();
             lineCounter.setText("1\n");
             for(int i=2; i<=totalfilas;i++){
                 lineCounter.setText(lineCounter.getText()+i+"\n");
