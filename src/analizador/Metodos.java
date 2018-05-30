@@ -11,6 +11,7 @@ import java.util.Stack;
  */
 public class Metodos {
     Queue<Integer> pila=new LinkedList<>();
+    public String[] arreglopalabras;
     int bandera2 =3;
     public Metodos() {
         
@@ -45,7 +46,7 @@ public class Metodos {
         }
         //System.out.println("total: "+palabras);
         
-        String[] arreglopalabras = new String[palabras];
+        arreglopalabras = new String[palabras];
         while (token2.hasMoreTokens()){
             arreglopalabras[conteopalabras] = token2.nextToken();
             conteopalabras++;
@@ -185,6 +186,7 @@ public class Metodos {
         }
         return false;
     }
+    
     public boolean esString(String letra){
         String abcedario[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i",
             "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
@@ -203,6 +205,7 @@ public class Metodos {
         for (int i = 0; i < palabras.length; i++) {
             esPalabraReservada(palabras[i]);
         }
+        
         int tamano = pila.size();
         int[] tokens = new int[tamano];
         for (int i = 0; i < tamano; i++) {

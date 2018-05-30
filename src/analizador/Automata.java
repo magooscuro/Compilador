@@ -35,6 +35,9 @@ public class Automata {
             case 202://void 
                 if(estado.equals("q1"))
                     agregarAcola("q2");
+                else
+                    if(estado.equals("q4"))
+                        agregarAcola("q29");
             break;
             case 203://main
                 if(estado.equals("q2"))
@@ -49,6 +52,9 @@ public class Automata {
                 else
                     if(estado.equals("q17"))
                         agregarAcola("q18");
+                    else
+                        if(estado.equals("q31"))
+                            agregarAcola("q32");
             break;
             case 207:// if
                 if(estado.equals("q22"))
@@ -56,10 +62,19 @@ public class Automata {
                 else
                     if(estado.equals("q4"))
                         agregarAcola("q11");
+                    else
+                        if(estado.equals("q17"))
+                            agregarAcola("q11");
             break;
             case 208:// else
-                //if(estado.equals("q22"))
-                  //  agregarAcola("q17");
+                if(estado.equals("q4"))
+                    agregarAcola("q11");
+                else
+                    if(estado.equals("q22"))
+                        agregarAcola("q17");
+                    else
+                        if(estado.equals("q17"))
+                            agregarAcola("q11");
             break;
             case 210:// while
                 if(estado.equals("q4"))
@@ -67,6 +82,18 @@ public class Automata {
                 else
                     if(estado.equals("q22"))
                         agregarAcola("q17");
+                    else
+                        if(estado.equals("q17"))
+                            agregarAcola("q11");
+            break;
+            case 300://=
+            case 301:// +=
+            case 302:// -=
+                if(estado.equals("q8"))
+                    agregarAcola("q9");
+                else
+                    if(estado.equals("q19"))
+                        agregarAcola("q20");
             break;
             case 700://id          $cualquier cosa :)
                 if(estado.equals("q5"))
@@ -86,15 +113,22 @@ public class Automata {
                                 else
                                     if(estado.equals("q18"))
                                         agregarAcola("q19");
+                                    else
+                                        if(estado.equals("q24"))
+                                            agregarAcola("q27");
+                                        else
+                                        if(estado.equals("q32"))
+                                            agregarAcola("q33");
             break;
-            case 300://=
-            case 301:// +=
-            case 302:// -=
-                if(estado.equals("q8"))
-                    agregarAcola("q9");
+            case 701:// 
+                if(estado.equals("q4"))
+                    agregarAcola("q23");
                 else
-                    if(estado.equals("q19"))
-                        agregarAcola("q20");
+                    if(estado.equals("q5"))
+                        agregarAcola("q30");
+                    else
+                        if(estado.equals("q29"))
+                            agregarAcola("q30");
             break;
             case 800:// 999 es entero
             case 801:// abc es string
@@ -111,6 +145,9 @@ public class Automata {
                         else
                             if(estado.equals("q14"))
                                 agregarAcola("q15");
+                            else
+                                if(estado.equals("q24"))
+                                agregarAcola("q27");
             break;
             case 600:// ;
                 if(estado.equals("q10") || estado.equals("q8"))
@@ -118,21 +155,40 @@ public class Automata {
                 else
                     if(estado.equals("q21") || estado.equals("q19"))
                         agregarAcola("q22");
+                    else
+                        if(estado.equals("q25"))
+                            agregarAcola("q4");
             break;
             case 601:// (
                 if(estado.equals("q11"))
                     agregarAcola("q12");
+                else
+                    if(estado.equals("q23"))
+                        agregarAcola("q24");
+                    else
+                        if(estado.equals("q30"))
+                            agregarAcola("q31");
             break;
             case 602:// )
                 if(estado.equals("q15"))
                     agregarAcola("q16");
+                else
+                    if(estado.equals("q24"))
+                        agregarAcola("q25");
+                    else
+                        if(estado.equals("q31") || estado.equals("q33"))
+                            agregarAcola("q34");
             break;
             case 603:// {
                 if(estado.equals("q3"))
                     agregarAcola("q4");
                 else
-                    if(estado.equals("q16"))
+                    if(estado.equals("q16") || estado.equals("q34"))
                         agregarAcola("q17");
+            break;
+            case 605:// {
+                if(estado.equals("q27"))
+                    agregarAcola("q4");
             break;
             //******************************************************************
             

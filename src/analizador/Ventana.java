@@ -29,7 +29,7 @@ public class Ventana extends JFrame{
     private JMenuItem jMenuItem3,jMenuItem6;
     private JPanel jPanel1;
     private JScrollPane jScrollPane1,jScrollPane2,jScrollPane3;
-    private static JTextArea entrada,lineCounter,salidad;
+    JTextArea entrada,lineCounter,salidad;
     private JButton compilar,vertokens;
     
     public Ventana() {

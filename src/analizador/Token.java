@@ -6,6 +6,7 @@
 package analizador;
 
 import java.awt.Frame;
+import java.util.Arrays;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -18,22 +19,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Token extends JDialog {
     JTable tabla_1 = new JTable();
+    Ventana v = new Ventana();
     private JScrollPane jScrollPane1;
     private JTable tokens;
-    DefaultTableModel dtm;
+    Metodos m = new Metodos();
+    String[] palabras;
+    String[][] datostabla = new String[50][2];
 
+    
     public Token(Frame parent, boolean modal,int[] idtoken) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Ver tokens");
         try {
-            //int id=Integer.parseInt(line);
-            Object ob[]=new Object[2];
-            ob[0]=idtoken;
-            //ob[1]=yytoknum[id];
-            //tokens.addRowSelectionInterval(1, 1);
-
+            datos();
+            llenarTabla();
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
         }
@@ -78,6 +79,26 @@ public class Token extends JDialog {
         pack();
     }// </editor-fold>                        
     
+    public void datos(){
+        int tamaño = m.pila.size();
+        palabras = m.lecturaBACKpalabras(v.entrada.getText());
+        int[] token = m.operaciones(v.entrada.getText());
+        for (int i = 0; i < tamaño; i++) {
+            datostabla[i][0] = ""+token;
+            datostabla[i][1] = ""+Arrays.toString(palabras);
+        }
+    }
+    
+    
+    private void llenarTabla(){
+        tokens.setModel(new javax.swing.table.DefaultTableModel(
+            datostabla,
+            new String [] {
+                "id token", "palabra"
+            }
+        ));
+        jScrollPane1.setViewportView(tokens);
+    }
     
     /*tabla_1.setBounds(600, 0, 500, 500);
         
