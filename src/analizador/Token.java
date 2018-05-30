@@ -34,7 +34,7 @@ public class Token extends JDialog {
         setTitle("Ver tokens");
         try {
             //int id=Integer.parseInt(line);
-//            Object ob[]=new Object[2];
+            Object ob[]=new Object[2];
 //            ob[0]=yytname[id];
 //            ob[1]=yytoknum[id];
             //((DefaultTableModel)tokens.getModel()).addRow(ob);
