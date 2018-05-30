@@ -99,7 +99,7 @@ public class Automata {
             case 800:// 999 es entero
             case 801:// abc es string
             case 802:// 9.99 es double
-            case 803:// 999
+            case 803:// true
                 if(estado.equals("q9"))
                     agregarAcola("q10");
                 else
@@ -108,6 +108,9 @@ public class Automata {
                     else
                         if(estado.equals("q20"))
                             agregarAcola("q21");
+                        else
+                            if(estado.equals("q14"))
+                                agregarAcola("q15");
             break;
             case 600:// ;
                 if(estado.equals("q10") || estado.equals("q8"))
