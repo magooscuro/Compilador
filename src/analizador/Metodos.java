@@ -148,16 +148,19 @@ public class Metodos {
         return false;
     }
     
-    public void operaciones(String cadena){
+    public int[] operaciones(String cadena){
         String[] palabras = lecturaBACKpalabras(cadena);
+        
         for (int i = 0; i < palabras.length; i++) {
             esPalabraReservada(palabras[i]);
         }
         int tamano = pila.size();
+        int[] tokens = new int[tamano];
         for (int i = 0; i < tamano; i++) {
-            System.out.println(sacarDepila()); 
+            tokens[i] = sacarDepila();
+            System.out.println(tokens[i]);
         }
-        
+        return tokens;
     }
     
     public boolean esPrincipal(String palabra){

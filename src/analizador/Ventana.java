@@ -216,10 +216,18 @@ public class Ventana extends JFrame{
     }                       
 
     private void compilarActionPerformed(ActionEvent evt) {
-        metodos.operaciones(entrada.getText());
+        Automata a =new Automata();
+        int[] tokens = metodos.operaciones(entrada.getText());
+        int tam = tokens.length;
+        for (int i = 0; i < tam; i++) {
+            a.AutomataFinito(tokens[i]);
+        }
+        String cadenapila = a.mostrarpila();
+        salidad.setText(cadenapila);
     }
     private void vertokensActionPerformed(ActionEvent evt) {
-        Token ver_tabla_tokens = new Token(this, true);
+        int[] tokens = metodos.operaciones(entrada.getText());
+        Token ver_tabla_tokens = new Token(this, true,tokens);
         ver_tabla_tokens.setVisible(true);
         
     }

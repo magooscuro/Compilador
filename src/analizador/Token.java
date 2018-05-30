@@ -5,17 +5,11 @@
  */
 package analizador;
 
-import static analizador.tokens.*;
-import java.awt.Font;
 import java.awt.Frame;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,8 +20,9 @@ public class Token extends JDialog {
     JTable tabla_1 = new JTable();
     private JScrollPane jScrollPane1;
     private JTable tokens;
+    DefaultTableModel dtm;
 
-    public Token(Frame parent, boolean modal) {
+    public Token(Frame parent, boolean modal,int[] idtoken) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -35,9 +30,9 @@ public class Token extends JDialog {
         try {
             //int id=Integer.parseInt(line);
             Object ob[]=new Object[2];
-//            ob[0]=yytname[id];
-//            ob[1]=yytoknum[id];
-            //((DefaultTableModel)tokens.getModel()).addRow(ob);
+            ob[0]=idtoken;
+            //ob[1]=yytoknum[id];
+            //tokens.addRowSelectionInterval(1, 1);
 
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
@@ -51,7 +46,7 @@ public class Token extends JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tokens.setModel(new javax.swing.table.DefaultTableModel(
+        tokens.setModel(new DefaultTableModel(
             new Object [][] {
 
             },
