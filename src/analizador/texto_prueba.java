@@ -1,47 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package analizador;
 
-/**
- *
- * @author luis_
- */
 public class texto_prueba {
     
     private void pruebame(){
-        /************************************************
-        public static void main()
-        {
-        int $var = 999;
-        int $variable;
-            while(){
-                
-            }
-        }
-        */
+/*
         
-        /*
-        public static void main()
-        {
-        int $a = 5;
-        }
+public static void main() {
+int $var = 999 ;
+int $variable ;
+double $vat = 5 + $fre * 4 / 5  ;
+while( $aas < 520 ) {
 
-
-public static void main()
-{
-        int $a ;
-if ( $g > $h )
-{
-string $hu +=  "hola" ;
+if ( $g > $h ) {
+string $hu +=  "hola" / 5 ;
 }
+else ( 4 > $uin ) {
+
 }
 
-
-
-        // la salida de arriba me deberia de dar
+}
+}
+        
+        // la salida de arriba me deberia de dar es de otro ejemplo
                 q00
 
         200                    q0

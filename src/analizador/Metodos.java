@@ -3,8 +3,6 @@ package analizador;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
-import java.util.Stack;
 /**
  *
  * @author luis_
@@ -18,21 +16,7 @@ public class Metodos {
     }
     
     
-    public String[] lecturaBACKpalabras(String cadena){
-        /*El método toma como parámetro una expresión regular. Si se quiere utilizar un separador textual,
-        se deben escapar los caracteres \ ^ $ . | ? * + ( ) [ { antecediéndolos con una \.
-        String[] parts = string.split("\\|"); // Separar por "|"*/
-        
-        //String separador = Pattern.quote("\\ ^ $ . | ? * + ( ) [ {");
-                
-//        String separador = " ";
-//        String[] parts = cadena.split(" ");
-//        //int tamaño =parts.length;
-//        for (int i = 0; i < parts.length; i++) {
-//            System.out.println(""+parts[i]);
-//        }
-
-        
+    public String[] lecturaBACKpalabras(String cadena){        
         String entrada1= cadena.replaceAll("\n"," ");
         int palabras=0,conteopalabras=0;
         
@@ -210,8 +194,9 @@ public class Metodos {
         int[] tokens = new int[tamano];
         for (int i = 0; i < tamano; i++) {
             tokens[i] = sacarDepila();
-            System.out.println(tokens[i]);
+            System.out.print("  "+tokens[i]);
         }
+        System.out.println("");
         return tokens;
     }
     
@@ -222,7 +207,8 @@ public class Metodos {
     }
     
     public boolean esIdentificador(){
-        //es palabra reservada??
+        //es palabra reservada?? 
+        //agrega como identificador en la tabla
         return false;
     }
     

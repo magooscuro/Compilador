@@ -7,22 +7,22 @@ import java.util.Stack;
  * @author luis_
  */
 public class Automata {
-    Stack<String> pila=new Stack<>();
+    Stack<String> pilaEstados=new Stack<>();
 
     public Automata() {
         agregarAcola("q00");
     }
     
     private String sacarDecola(){
-        return pila.pop();
+        return pilaEstados.pop();
     }
     
     private void agregarAcola(String estado){
-        pila.push(estado);
+        pilaEstados.push(estado);
     }
     
     public String AutomataFinito(int token){
-        String estado = pila.peek();
+        String estado = pilaEstados.peek();
         switch(token){
             case 200://public
                 if(estado.equals("q00"))
@@ -95,59 +95,23 @@ public class Automata {
                     if(estado.equals("q19"))
                         agregarAcola("q20");
             break;
-            case 700://id          $cualquier cosa :)
-                if(estado.equals("q5"))
-                    agregarAcola("q8");
+            case 401:// +
+            case 402:// -
+            case 403:// *
+            case 404:// /
+                if(estado.equals("q10"))
+                    agregarAcola("q6");
                 else
-                    if(estado.equals("q12"))
-                        agregarAcola("q13");
-                    else
-                        if(estado.equals("q14"))
-                            agregarAcola("q15");
-                        else
-                            if(estado.equals("q4"))
-                                agregarAcola("q8");
-                            else
-                                if(estado.equals("q17"))
-                                    agregarAcola("q19");
-                                else
-                                    if(estado.equals("q18"))
-                                        agregarAcola("q19");
-                                    else
-                                        if(estado.equals("q24"))
-                                            agregarAcola("q27");
-                                        else
-                                        if(estado.equals("q32"))
-                                            agregarAcola("q33");
+                    if(estado.equals("q21"))
+                        agregarAcola("q23");
             break;
-            case 701:// 
-                if(estado.equals("q4"))
-                    agregarAcola("q23");
-                else
-                    if(estado.equals("q5"))
-                        agregarAcola("q30");
-                    else
-                        if(estado.equals("q29"))
-                            agregarAcola("q30");
-            break;
-            case 800:// 999 es entero
-            case 801:// abc es string
-            case 802:// 9.99 es double
-            case 803:// true
-                if(estado.equals("q9"))
-                    agregarAcola("q10");
-                else
-                    if(estado.equals("q12"))
-                        agregarAcola("q13");
-                    else
-                        if(estado.equals("q20"))
-                            agregarAcola("q21");
-                        else
-                            if(estado.equals("q14"))
-                                agregarAcola("q15");
-                            else
-                                if(estado.equals("q24"))
-                                agregarAcola("q27");
+            case 500:// >
+            case 501:// <
+            case 502:// >=
+            case 503:// <=
+            case 504:// !=
+                if(estado.equals("q13"))
+                    agregarAcola("q14");
             break;
             case 600:// ;
                 if(estado.equals("q10") || estado.equals("q8"))
@@ -190,39 +154,106 @@ public class Automata {
                 if(estado.equals("q27"))
                     agregarAcola("q4");
             break;
-            //******************************************************************
-            
-            
-            case 500:// >
-            case 501:// <
-            case 502:// >=
-            case 503:// <=
-            case 504:// !=
-                if(estado.equals("q13"))
-                    agregarAcola("q14");
-            break;
-            
-            
-            
-            
-            
+            //****************************************************************** estado final
             case 604://}        ESTADO FINAL
                 if(estado.equals("q4"))
                     agregarAcola("q100");
                 else
                     if(estado.equals("q22"))
                         agregarAcola("q4");
+//                    else
+//                        if(estado.equals("q17"))
+//                            agregarAcola("q4");
+            break;
+            case 700://id          $cualquier cosa :)
+                if(estado.equals("q5"))
+                    agregarAcola("q8");
+                else
+                    if(estado.equals("q9"))
+                        agregarAcola("q10");
+                    else
+                        if(estado.equals("q12"))
+                            agregarAcola("q13");
+                        else
+                            if(estado.equals("q14"))
+                                agregarAcola("q15");
+                            else
+                                if(estado.equals("q4"))
+                                    agregarAcola("q8");
+                                else
+                                    if(estado.equals("q17"))
+                                        agregarAcola("q19");
+                                    else
+                                        if(estado.equals("q18"))
+                                            agregarAcola("q19");
+                                        else
+                                            if(estado.equals("q24"))
+                                                agregarAcola("q27");
+                                            else
+                                                if(estado.equals("q32"))
+                                                    agregarAcola("q33");
+                                                else
+                                                    if(estado.equals("q6"))
+                                                        agregarAcola("q10");
+                                                    else
+                                                        if(estado.equals("q23"))
+                                                            agregarAcola("q21");
+            break;
+            case 701:// 
+                if(estado.equals("q4"))
+                    agregarAcola("q23");
+                else
+                    if(estado.equals("q5"))
+                        agregarAcola("q30");
+                    else
+                        if(estado.equals("q29"))
+                            agregarAcola("q30");
+            break;
+            case 800:// 999 es entero
+            case 801:// abc es string
+            case 802:// 9.99 es double
+            case 803:// true
+                if(estado.equals("q9"))
+                    agregarAcola("q10");
+                else
+                    if(estado.equals("q6"))
+                        agregarAcola("q10");
+                    else
+                        if(estado.equals("q12"))
+                            agregarAcola("q13");
+                        else
+                            if(estado.equals("q20"))
+                                agregarAcola("q21");
+                            else
+                                if(estado.equals("q14"))
+                                    agregarAcola("q15");
+                                else
+                                    if(estado.equals("q24"))
+                                        agregarAcola("q27");
+                                    else
+                                        if(estado.equals("q23"))
+                                            agregarAcola("q21");
             break;
         }
-        estado = pila.peek();
+        estado = pilaEstados.peek();
         return estado;
     }
     
     public String mostrarpila(){
-        while (!pila.isEmpty()) { // mostrar pila completa
-            return ""+pila.pop(); // extrae un elemento de la pila
+        while (!pilaEstados.isEmpty()) { // mostrar pilaEstados completa
+            //System.err.println("estado: "+pilaEstados.peek());
+            return ""+pilaEstados.peek(); // extrae un elemento de la pilaEstados
         }
         return "";
+    }
+    
+    public void mostrar(){
+        while (!pilaEstados.isEmpty()) { // mostrar pilaEstados completa
+            System.out.print("  "+pilaEstados.pop());
+            //return ""+pilaEstados.pop(); // extrae un elemento de la pilaEstados
+        }
+        System.out.println("");
+        pilaEstados.removeAllElements();
     }
 }
 

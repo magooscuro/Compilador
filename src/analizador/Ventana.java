@@ -190,46 +190,28 @@ public class Ventana extends JFrame{
     }                                                                                
 
     private void jMenuItem3ActionPerformed(ActionEvent evt) {
-        try {
-            //Guardar();
-//            Process p = Runtime.getRuntime().exec("../Proyecto1.exe " + dirNuevo);
-//            p.waitFor();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//            String line = reader.readLine();
-//            String el[]=line.split("-");
-//            while(el.length<2) {
-//                line = reader.readLine();
-//                el=line.split("-");
-//            }
-//            if(line!=null){
-//                
-//                if(el[0].equals("Exito")){
-//                    output.setText("Compilado con exito.\nNumero de filas compiladas: "+el[1]);
-//                }
-//                else{
-//                    output.setText("Error en la linea: "+el[1]);
-//                }
-//            }
-
-        } catch (Exception e1) {
-            JOptionPane.showMessageDialog(this, e1.getMessage());
-        }
+        
     }                       
 
     private void compilarActionPerformed(ActionEvent evt) {
         Automata a =new Automata();
-        String cadenapila="";
+        String cadenapila;
         int[] tokens = metodos.operaciones(entrada.getText());
         int tam = tokens.length;
         for (int i = 0; i < tam; i++) {
             a.AutomataFinito(tokens[i]);
         }
-        cadenapila += a.mostrarpila();
+        cadenapila = a.mostrarpila();
         if(cadenapila.equals("q100")){
             System.out.print("LENGUAJE ACEPTADO");
             salidad.setText(cadenapila+" > LENGUAJE ACEPTADO");
-        }else
+            a.mostrar();
+            System.out.println("");
+        }else{
             salidad.setText(cadenapila+" > LENGUAJE NO ACEPTADO");
+            a.mostrar();
+            System.out.println("");
+        }
         
     }
     private void vertokensActionPerformed(ActionEvent evt) {
@@ -255,8 +237,7 @@ public class Ventana extends JFrame{
     }                                   
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
-//        Token vtk=new Token(this, true, dirNuevo, this);
-//        vtk.show();
+        
     }
 
     private void jtxtAreaKeyReleased(java.awt.event.KeyEvent evt) {
