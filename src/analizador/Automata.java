@@ -8,7 +8,7 @@ import java.util.Stack;
  */
 public class Automata {
     Stack<String> pilaEstados=new Stack<>();
-
+    Tabla_Simbolos cola = new Tabla_Simbolos();
     public Automata() {
         agregarAcola("q00");
     }

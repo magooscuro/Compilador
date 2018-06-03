@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,7 +23,8 @@ import javax.swing.KeyStroke;
  * @author luis_
  */
 public class Ventana extends JFrame{
-    private Metodos metodos;
+    Metodos metodos;
+    
     private JLabel jLabel1,jLabel2;
     private JMenu jMenu2;
     private JMenuBar jMenuBar1;
@@ -60,16 +62,20 @@ public class Ventana extends JFrame{
 
         jLabel1.setText("Compilador");
         compilar.setText("compilar");
-        compilar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        compilar.addActionListener((ActionEvent evt) -> {
+            try {
                 compilarActionPerformed(evt);
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         vertokens.setText("ver tokens");
         //vertokens.setVisible(false);
-        vertokens.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        vertokens.addActionListener((ActionEvent evt) -> {
+            try {
                 vertokensActionPerformed(evt);
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -193,7 +199,7 @@ public class Ventana extends JFrame{
         
     }                       
 
-    private void compilarActionPerformed(ActionEvent evt) {
+    private void compilarActionPerformed(ActionEvent evt) throws Exception {
         Automata a =new Automata();
         String cadenapila;
         int[] tokens = metodos.operaciones(entrada.getText());
@@ -214,11 +220,12 @@ public class Ventana extends JFrame{
         }
         
     }
-    private void vertokensActionPerformed(ActionEvent evt) {
-        int[] tokens = metodos.operaciones(entrada.getText());
-        String[] palabras = metodos.lecturaBACKpalabras(entrada.getText());
+    
+    private void vertokensActionPerformed(ActionEvent evt) throws Exception {
+        Nodo inicio = metodos.regresaINICIO();
+        int tamaño = metodos.regresaTAMAÑO();
         
-        Token ver_tabla_tokens = new Token(this, true,tokens,palabras);
+        Token ver_tabla_tokens = new Token(this, true,inicio,tamaño);
         ver_tabla_tokens.setVisible(true);
         
     }

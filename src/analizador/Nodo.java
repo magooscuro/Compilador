@@ -14,15 +14,23 @@ public class Nodo {
     Nodo Siguiente;
     Nodo Anterior;
 
-    public Nodo(String _nombre_palabra, int _idtoken, String _valor, String _tipo, String pertenece_a, Nodo Siguiente, Nodo Anterior) {
-        this.nombre_palabra = _nombre_palabra;
-        this.idtoken = _idtoken;
-        this.valor = _valor;
-        this.tipo = _tipo;
-        this.pertenece_a = pertenece_a;
-        this.Siguiente = Siguiente;
-        this.Anterior = Anterior;
+    //AGREGA TABLA DE SIMBOLOS
+    public Nodo(String _nombre_palabra, int _idtoken, String _valor, String _tipo, String _pertenece_a) {
+        nombre_palabra = _nombre_palabra;
+        idtoken = _idtoken;
+        valor = _valor;
+        tipo = _tipo;
+        pertenece_a = _pertenece_a;
+        Siguiente = null;
     }
+    
+    //AGREGA PALABRA RESERVADA Y TOKENS
+    public Nodo(String _nombre_palabra, int _idtoken) {
+        nombre_palabra = _nombre_palabra;
+        idtoken = _idtoken;
+        Siguiente = null;
+    }
+    
 
     
     

@@ -23,21 +23,21 @@ public final class Token extends JDialog {
     private JScrollPane jScrollPane1;
     private JTable tokens;
     Metodos m = new Metodos();
-    String[][] datostabla = new String[50][2];
-
+    String[][] datostabla = new String[50][5];
     
-    public Token(Frame parent, boolean modal,int[] idtoken,String[] palabras) {
+    public Token(Frame parent, boolean modal, Nodo inicio,int tamaño) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Ver tokens");
         try {
-            datos(idtoken,palabras);
+            datos(inicio,tamaño);
             llenarTabla();
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
@@ -51,7 +51,7 @@ public final class Token extends JDialog {
 
             },
             new String [] {
-                "Id Token", "Token"
+                "Id Token", "Palabra","Tipo","Valor","Pertenecen a"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -78,52 +78,27 @@ public final class Token extends JDialog {
         pack();
     }// </editor-fold>                        
     
-    public void datos(int[] token, String[] palabras){
-        int tamaño = m.pila.size();//esta llamada esta mal devuleve 0
+    public void datos(Nodo inicio, int tam){
+        int tamaño = tam;
         System.err.println("tamaño : "+tamaño);
         for (int i = 0; i < tamaño; i++) {
-            datostabla[i][0] = ""+token[i];
-            //System.err.println(""+token[i]);
-            datostabla[i][1] = ""+palabras[i];
-            
+            datostabla[i][0] = inicio.nombre_palabra;
+            datostabla[i][1] = ""+inicio.idtoken;
+            datostabla[i][2] = inicio.valor;
+            datostabla[i][3] = inicio.tipo;
+            datostabla[i][4] = inicio.pertenece_a;
+            inicio=inicio.Siguiente;
         }
     }
-    
     
     private void llenarTabla(){
         System.out.println("0: "+datostabla[0][0]+" 1: "+datostabla[0][1]);
         tokens.setModel(new javax.swing.table.DefaultTableModel(
             datostabla,
             new String [] {
-                "id token", "palabra"
+                "Palabra","Id Token","Valor","Tipo","Pertenece a"
             }
         ));
         jScrollPane1.setViewportView(tokens);
     }
-    
-    /*tabla_1.setBounds(600, 0, 500, 500);
-        
-        tabla_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED));
-        tabla_1.setFont(new Font("Verdana", 0, 11));
-        tabla_1.setModel(new DefaultTableModel(
-            new String [][] {
-                {"20", null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "hola", "mundo", "soy", "deadpool", "null"
-            }
-        ));
-        //tabla_1.setEnabled(false);
-        scroll.setViewportView(tabla_1);*/
 }
