@@ -66,7 +66,7 @@ public class Ventana extends JFrame{
             }
         });
         vertokens.setText("ver tokens");
-        vertokens.setVisible(false);
+        //vertokens.setVisible(false);
         vertokens.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 vertokensActionPerformed(evt);
@@ -215,11 +215,11 @@ public class Ventana extends JFrame{
         
     }
     private void vertokensActionPerformed(ActionEvent evt) {
-//        int[] tokens = metodos.operaciones(entrada.getText());
-//        String[] palabras = metodos.lecturaBACKpalabras(entrada.getText());
-//        
-//        Token ver_tabla_tokens = new Token(this, true,tokens,palabras);
-//        ver_tabla_tokens.setVisible(true);
+        int[] tokens = metodos.operaciones(entrada.getText());
+        String[] palabras = metodos.lecturaBACKpalabras(entrada.getText());
+        
+        Token ver_tabla_tokens = new Token(this, true,tokens,palabras);
+        ver_tabla_tokens.setVisible(true);
         
     }
     public void contarFilas(){

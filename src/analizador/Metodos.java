@@ -9,12 +9,13 @@ import java.util.StringTokenizer;
  */
 public class Metodos {
     Queue<Integer> pila=new LinkedList<>();
+    String[] arregloTokens;
+    
     public String[] arreglopalabras;
     int bandera2 =3;
     public Metodos() {
         
     }
-    
     
     public String[] lecturaBACKpalabras(String cadena){        
         String entrada1= cadena.replaceAll("\n"," ");
@@ -26,9 +27,7 @@ public class Metodos {
         while (token1.hasMoreTokens()){
             palabras++;
             token1.nextToken();
-            //System.out.println("No importante "+palabras);
         }
-        //System.out.println("total: "+palabras);
         
         arreglopalabras = new String[palabras];
         while (token2.hasMoreTokens()){
@@ -56,7 +55,6 @@ public class Metodos {
                 else
                     bandera = false;
         }//return 5;
-        
         
         if(!bandera){
             char[] palabra = token.toCharArray();
@@ -217,9 +215,6 @@ public class Metodos {
         pila.add(cadena);
             //pila.push(Integer.toString(palabras[i]));
         }
-        
-        
-    
     
     public int sacarDepila(){
             return pila.remove();

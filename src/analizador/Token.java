@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luis_
  */
-public class Token extends JDialog {
+public final class Token extends JDialog {
     JTable tabla_1 = new JTable();
     Ventana v = new Ventana();
     private JScrollPane jScrollPane1;
@@ -79,15 +79,19 @@ public class Token extends JDialog {
     }// </editor-fold>                        
     
     public void datos(int[] token, String[] palabras){
-        int tamaño = m.pila.size();
+        int tamaño = m.pila.size();//esta llamada esta mal devuleve 0
+        System.err.println("tamaño : "+tamaño);
         for (int i = 0; i < tamaño; i++) {
-            datostabla[i][0] = ""+token;
-            datostabla[i][1] = ""+Arrays.toString(palabras);
+            datostabla[i][0] = ""+token[i];
+            //System.err.println(""+token[i]);
+            datostabla[i][1] = ""+palabras[i];
+            
         }
     }
     
     
     private void llenarTabla(){
+        System.out.println("0: "+datostabla[0][0]+" 1: "+datostabla[0][1]);
         tokens.setModel(new javax.swing.table.DefaultTableModel(
             datostabla,
             new String [] {
