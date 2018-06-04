@@ -15,6 +15,9 @@ public class Metodos {
     
     public String[] arreglopalabras;
     int bandera2 =3;
+    int banderaValor = 0;
+    String nombreVariable;
+    int identificador;
     
     public String[] lecturaBACKpalabras(String cadena){        
         String entrada1= cadena.replaceAll("\n"," ");
@@ -299,7 +302,52 @@ public class Metodos {
         return false;
     }
     
-    public boolean esValor(String entrada){//si es un valor estring "hola" o entero o decimal o booleano
+    public boolean esValor(String entrada){//si es un valor string "hola" o entero o decimal o booleano
+        
+        char[] numeros = entrada.toCharArray();
+        
+        if(String.valueOf(numeros[0]).equals("\"")){
+            return true;
+        }
+        else{
+        String numero[] = {"1","2","3","4","5","6","7","8","9","0"};
+        int bandera = 0;
+        boolean bandera2 =false;
+        int error =0;
+        
+        for (int i = 0; i < numeros.length; i++) {
+            for (int j = 0; j < numero.length; j++) {
+                if(String.valueOf(numeros[i]).equals(numero[j])){
+                    if(bandera != 5 && bandera!=3)
+                    bandera = 1;                    
+                }                
+            }
+            /*if(bandera == 0){
+                System.out.println("puede serpunto");*/
+                if(String.valueOf(numeros[i]).equals(".")){
+                    if(bandera==3){
+                        bandera=5;
+                        error = 1;
+                    }
+                    if(i<(numeros.length-1)){
+                        bandera=3;
+                    }
+                }
+                
+            }
+
+            
+        //}
+        if(bandera==1){
+            return true;
+        }else{
+            if(bandera==3){
+                return true;
+            }else{
+                if(error==1){
+                    return false;}
+            }
+        }}
         return false;
     }
     public boolean esError(String entrada){//si el token le va a ingresar 100
@@ -317,6 +365,7 @@ public class Metodos {
     public void llenarTABLA_DE_SIMBOLOS() throws Exception{
         //LLAMAR A TDA PALABRASTOKES Y PRELLENAR TABLA SIMBOLOS
         int tamaño = entrada.tamaño();
+        System.out.println(entrada+"-----------");
         System.out.println("tamaño;: "+tamaño);
         String[] primero = new String[2];
         System.out.println("En entrada hay "+primero[0]+"\t"+primero[1]);
@@ -332,13 +381,18 @@ public class Metodos {
                         tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Palabra Reservada");
                     }else
                         if(esIdentificador(primero[0])){
-                            tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "devolver inicio.sig.sig if el 3 sig es operador hacer operacion", "con tokens buscar 800 o 801", "Identificador");
+                            nombreVariable = primero[0];
+                            identificador = Integer.parseInt(primero[1]);
+                            banderaValor = 1;
+                            //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "devolver inicio.sig.sig if el 3 sig es operador hacer operacion", "con tokens buscar 800 o 801", "Identificador");
                         }else
                             if(esAsignador(primero[0])){
                                 tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Asignador");
                             }else
                                 if(esValor(primero[0])){//los vvalores se insertan
-                                    //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Es Valor");
+                                    if(banderaValor == 1){
+                                    tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
+                                    }
                                 }else
                                     if(esCondicional(primero[0])){
                                         tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Condicional");
