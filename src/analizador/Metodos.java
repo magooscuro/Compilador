@@ -11,7 +11,8 @@ public class Metodos {
     Queue<Integer> pila=new LinkedList<>();
     //String[] arregloTokens;
     Palabras_tokens entrada = new Palabras_tokens();
-    Tabla_Simbolos tabla_simbolos = new Tabla_Simbolos();
+    Palabras_tokens entrada2 = new Palabras_tokens();
+    Tabla_Simbolos tabla_simbolos;
     
     public String[] arreglopalabras;
     int bandera2 =3;
@@ -24,10 +25,12 @@ public class Metodos {
         int palabras=0,conteopalabras=0;
         StringTokenizer token1 = new StringTokenizer(entrada1, " ");
         StringTokenizer token2 = new StringTokenizer(entrada1," ");
-        
+        String a;
         while (token1.hasMoreTokens()){
             palabras++;
-            entrada.insertar_cola(token1.nextToken(), 0);
+            a =token1.nextToken();
+            entrada.insertar_cola(a, 0);
+            entrada2.insertar_cola(a, 0);
         }
         
         arreglopalabras = new String[palabras];
@@ -51,6 +54,7 @@ public class Metodos {
                     //MODIFICAR
                     agregarApila(idtoken[i]);
                     entrada.buscar_e_ingresar_token(token, idtoken[i]);
+                    entrada2.buscar_e_ingresar_token(token, idtoken[i]);
                     bandera = true;
                     break;
                 }
@@ -65,6 +69,7 @@ public class Metodos {
                     if(palabra.length<2){
                         System.out.println("Error lexico Variable no esta bien definids");
                         entrada.buscar_e_ingresar_token(token, 100);
+                        entrada2.buscar_e_ingresar_token(token, 100);
                         agregarApila(100);
                     }else{
                         for (int i = 1; i < palabra.length; i++) {
@@ -72,6 +77,7 @@ public class Metodos {
                                 System.out.println("Error lexico simbolo no valido");
                                 bandera2 = 0;
                                 entrada.buscar_e_ingresar_token(token, 100);
+                                entrada2.buscar_e_ingresar_token(token, 100);
                                 agregarApila(100);
                             }
                         }
@@ -85,6 +91,7 @@ public class Metodos {
                                 if(String.valueOf(palabra[(palabra.length-1)]).equals("\""))
                                     if(bandera3==1){
                                         entrada.buscar_e_ingresar_token(token, 801);
+                                        entrada2.buscar_e_ingresar_token(token, 801);
                                         agregarApila(801);
                                     }
                                 else
@@ -93,6 +100,7 @@ public class Metodos {
                             if (!esString(String.valueOf(palabra[i]))){
                                 System.out.println("Error lexico simbolo no valido--"+palabra[i]);
                                 entrada.buscar_e_ingresar_token(token, 100);
+                                entrada2.buscar_e_ingresar_token(token, 100);
                                 agregarApila(100);
                                 bandera3 = 0;
                                 
@@ -103,11 +111,13 @@ public class Metodos {
                         if(palabra.length == 1){
                             if(Abcedario(String.valueOf(palabra[0]))){
                                 entrada.buscar_e_ingresar_token(token, 701);
+                                entrada2.buscar_e_ingresar_token(token, 701);
                                 agregarApila(701);
                             }
                             else{
                                 System.out.println("Eror no pertenece");
                                 entrada.buscar_e_ingresar_token(token, 100);
+                                entrada2.buscar_e_ingresar_token(token, 100);
                                 agregarApila(100);
                                 esIntBoolea(token);
                             }
@@ -119,7 +129,9 @@ public class Metodos {
                 }
             if(bandera2 == 1){
                 entrada.buscar_e_ingresar_token(token, 700);
+                entrada2.buscar_e_ingresar_token(token, 700);
                 agregarApila(700);
+                System.out.println("token "+ token);
             bandera2=3;}
         }
        
@@ -196,9 +208,6 @@ public class Metodos {
         for (String palabra : palabras) {
             esPalabraReservada(palabra);
         }
-        entrada.mostrar();
-        llenarTABLA_DE_SIMBOLOS();
-        tabla_simbolos.mostrar();
         
         int tamano = pila.size();
         int[] tokens = new int[tamano];
@@ -206,6 +215,11 @@ public class Metodos {
             tokens[i] = sacarDepila();
             //System.out.print("  "+tokens[i]);
         }
+        entrada.mostrar();
+        tabla_simbolos = new Tabla_Simbolos();
+        llenarTABLA_DE_SIMBOLOS();
+        tabla_simbolos.mostrar();
+        
         //entrada.mostrar();
         return tokens;
     }
@@ -225,7 +239,7 @@ public class Metodos {
         
         for (int i = 0; i <= 12 ; i++) {
             if(reservada_palabra_u_otros[i].equals(entrada)){
-                System.err.println("entrada: "+entrada+"      condicional: "+reservada_palabra_u_otros[i]+"      token: "+idtoken[i]);
+                //System.err.println("entrada: "+entrada+"      condicional: "+reservada_palabra_u_otros[i]+"      token: "+idtoken[i]);
                 return true;
             }
         }
@@ -233,19 +247,20 @@ public class Metodos {
     }
     //id
     public boolean esIdentificador(String entrada){
-        String reservadas[] = {"public","static", "void", "main()","int","string","bolean",
-                                "if","else","double","while","=", "+=", "-=", "+", "-", "*", "/",
-                                ">", "<", ">=", "<=","!=",";","(",")","{","}",","};
-        int idtoken[] = {200,201,202,203,204,205,206,207,208,209,210,300,301,302,401,402,403,404,
-                        500,501,502,503,504,600,601,602,603,604,605};
+//        String reservadas[] = {"public","static", "void", "main()","int","string","bolean",
+//                                "if","else","double","while","=", "+=", "-=", "+", "-", "*", "/",
+//                                ">", "<", ">=", "<=","!=",";","(",")","{","}",","};
+//        int idtoken[] = {200,201,202,203,204,205,206,207,208,209,210,300,301,302,401,402,403,404,
+//                        500,501,502,503,504,600,601,602,603,604,605};
         
-        for (int i = 0; i < 29; i++) {
-            if(entrada.startsWith("$")){//700
+        //for (int i = 0; i < 2; i++) {
+            if(entrada.startsWith("$"))//700
                 return true;
-            }/*else{
-                if(entrada.startsWith(entrada))
-            }*/
-        }
+            else
+            //}/*else{
+                //if(entrada.startsWith(entrada))
+            //}*/
+        //}
         
         return false;
     }
@@ -256,7 +271,7 @@ public class Metodos {
         
         for (int i = 0; i <= 4 ; i++) {
             if(condicionales[i].equals(entrada)){
-                System.err.println("entrada: "+entrada+"      condicional: "+condicionales[i]+"      token: "+idtoken[i]);
+                //System.err.println("entrada: "+entrada+"      condicional: "+condicionales[i]+"      token: "+idtoken[i]);
                 return true;
             }
         }
@@ -269,7 +284,7 @@ public class Metodos {
         
         for (int i = 0; i <= 3 ; i++) {
             if(operadores[i].equals(entrada)){
-                System.err.println("entrada: "+entrada+"      condicional: "+operadores[i]+"      token: "+idtoken[i]);
+                //System.err.println("entrada: "+entrada+"      condicional: "+operadores[i]+"      token: "+idtoken[i]);
                 return true;
             }
         }
@@ -282,7 +297,7 @@ public class Metodos {
         
         for (int i = 0; i <= 3 ; i++) {
             if(tiposDeDatos[i].equals(entrada)){
-                System.err.println("entrada: "+entrada+"      condicional: "+tiposDeDatos[i]+"      token: "+idtoken[i]);
+                //System.err.println("entrada: "+entrada+"      condicional: "+tiposDeDatos[i]+"      token: "+idtoken[i]);
                 return true;
             }
         }
@@ -295,7 +310,7 @@ public class Metodos {
         
         for (int i = 0; i <= 2 ; i++) {
             if(asignadores[i].equals(entrada)){
-                System.err.println("entrada: "+entrada+"      condicional: "+asignadores[i]+"      token: "+idtoken[i]);
+                //System.err.println("entrada: "+entrada+"      condicional: "+asignadores[i]+"      token: "+idtoken[i]);
                 return true;
             }
         }
@@ -354,6 +369,12 @@ public class Metodos {
         return false;
     }
     
+    private int tipodato(String token){
+        int tipo = 0;
+        return tipo;
+    }
+    
+    
     public Nodo regresaINICIO(){
         return tabla_simbolos.inicio();
     }
@@ -364,35 +385,52 @@ public class Metodos {
     
     public void llenarTABLA_DE_SIMBOLOS() throws Exception{
         //LLAMAR A TDA PALABRASTOKES Y PRELLENAR TABLA SIMBOLOS
+        System.out.println("-----------------0");
         int tamaño = entrada.tamaño();
-        System.out.println(entrada+"-----------");
-        System.out.println("tamaño;: "+tamaño);
-        String[] primero = new String[2];
-        System.out.println("En entrada hay "+primero[0]+"\t"+primero[1]);
+        System.out.println("++++ "+ tamaño);
+        String[] primero;
+        String[] tipoDatoGuardado = new String[2];
+        String[] segundo;
         try {
             for (int p=1; p<=tamaño;p++) {
                 primero = entrada.eliminar_cola();
-                if(tabla_simbolos.buscar_si_existe(primero[0])){//ACTUALIZA EL VALOR
+                /*if(tabla_simbolos.buscar_si_existe(primero[0])){//ACTUALIZA EL VALOR.
                     //RECUPERAR VALORES
-                    //String[] valores_recuperados = tabla_simbolos.recuperar_valores(primero[0]);
-                    //tabla_simbolos.buscar_e_ingresar(valores_recuperados[0], Integer.parseInt(valores_recuperados[1]),valores_recuperados["aqui poner el nuevo valor a asignar"],valores_recuperados[3],valores_recuperados[4]);
-                }else{//INGRESA LA PALABRA
+//                    System.out.println("----------1");
+//                    String[] valores_recuperados = tabla_simbolos.recuperar_valores(primero[0]);
+//                    System.out.println(""+valores_recuperados[0]);
+//                    segundo =entrada.segundoNODO();
+//                        if(esValor(segundo[0])){
+//                            System.out.println(""+segundo[0]);
+//                           tabla_simbolos.buscar_e_ingresar(valores_recuperados[0], Integer.parseInt(valores_recuperados[1]),segundo[0],valores_recuperados[3],valores_recuperados[4]); 
+//                        }
+                    
+                    }else{//INGRESA LA PALABRA*/
                     if(esReservada(primero[0])){
                         tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Palabra Reservada");
                     }else
                         if(esIdentificador(primero[0])){
-                            nombreVariable = primero[0];
-                            identificador = Integer.parseInt(primero[1]);
-                            banderaValor = 1;
-                            //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "devolver inicio.sig.sig if el 3 sig es operador hacer operacion", "con tokens buscar 800 o 801", "Identificador");
+//                            nombreVariable = primero[0];
+//                            identificador = Integer.parseInt(primero[1]);
+//                            banderaValor = 1;
+                            segundo =entrada.segundoNODO();
+                            if(esValor(segundo[0])){
+                                if(esUnTipoDeDato(tipoDatoGuardado[0])){
+                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], tipoDatoGuardado[0], "Identificador");
+                                }else{
+                                    String[] valores_recuperados = tabla_simbolos.recuperar_valores(primero[0]);
+        //                          System.out.println(""+valores_recuperados[0]);
+                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], valores_recuperados[3], "Identificador");//""aqui poner tipo de una busqueda a la concurrencia anterior
+                                }
+                            }
                         }else
                             if(esAsignador(primero[0])){
                                 tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Asignador");
                             }else
                                 if(esValor(primero[0])){//los vvalores se insertan
-                                    if(banderaValor == 1){
-                                    tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
-                                    }
+                                    //if(banderaValor == 1){
+                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "valor");
+                                    //}
                                 }else
                                     if(esCondicional(primero[0])){
                                         tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Condicional");
@@ -402,8 +440,10 @@ public class Metodos {
                                         }else
                                             if(esUnTipoDeDato(primero[0])){
                                                 tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Tipo de dato");
+                                                tipoDatoGuardado[0]=primero[0];
+                                                tipoDatoGuardado[1]=primero[1];
                                             }//falta else de error
-                }//FIN DEL ELSE
+              //  }//FIN DEL ELSE
             }//FIN DEL WHILE
         } catch (Exception e) {
             System.err.println("ERROR AL LLENAR TABLA DE SIMBOLOS: "+e);

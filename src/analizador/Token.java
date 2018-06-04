@@ -23,7 +23,7 @@ public final class Token extends JDialog {
     private JScrollPane jScrollPane1;
     private JTable tokens;
     Metodos m = new Metodos();
-    String[][] datostabla = new String[50][5];
+    String[][] datostabla = new String[200][5];
     
     public Token(Frame parent, boolean modal, Nodo inicio,int tamaño) {
         super(parent, modal);
@@ -40,12 +40,9 @@ public final class Token extends JDialog {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
         jScrollPane1 = new javax.swing.JScrollPane();
         tokens = new javax.swing.JTable();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         tokens.setModel(new DefaultTableModel(
             new Object [][] {
 
@@ -92,7 +89,7 @@ public final class Token extends JDialog {
     }
     
     private void llenarTabla(){
-        System.out.println("0: "+datostabla[0][0]+" 1: "+datostabla[0][1]);
+        //System.out.println("0: "+datostabla[0][0]+" 1: "+datostabla[0][1]);
         tokens.setModel(new javax.swing.table.DefaultTableModel(
             datostabla,
             new String [] {

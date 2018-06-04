@@ -14,13 +14,13 @@ public class Tabla_Simbolos {
     public void insertar_cola(String palabra, int idtoken, String valor, String tipo, String pertenece_a){
         Nodo R;
         if(Inicio == null){
-            Inicio = new Nodo(palabra,idtoken,valor,tipo,pertenece_a);
+            Inicio = new Nodo(palabra,idtoken,valor,tipo,pertenece_a,null);
         }else{
             R = Inicio;
             while(R.Siguiente != null){
                 R = R.Siguiente;
             }
-            R.Siguiente = new Nodo(palabra,idtoken,valor,tipo,pertenece_a);
+            R.Siguiente = new Nodo(palabra,idtoken,valor,tipo,pertenece_a,R);
         }
     }
     
@@ -69,6 +69,7 @@ public class Tabla_Simbolos {
                 aux[2] = Inicio.valor;
                 aux[3] = Inicio.tipo;
                 aux[4] = Inicio.pertenece_a;
+                System.out.println("Recuperando inicio "+ Inicio.nombre_palabra);
                 //return aux;
             }
         }else{
@@ -83,6 +84,7 @@ public class Tabla_Simbolos {
                     aux[3] = Rec.tipo;
                     aux[4] = Rec.pertenece_a;
                     //return aux;
+                    System.out.println("Recuperando nodo "+ Inicio.nombre_palabra+"entrada "+ palabra);
                 }
             }
         return aux;

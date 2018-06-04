@@ -15,13 +15,14 @@ public class Nodo {
     Nodo Anterior;
 
     //AGREGA TABLA DE SIMBOLOS
-    public Nodo(String _nombre_palabra, int _idtoken, String _valor, String _tipo, String _pertenece_a) {
+    public Nodo(String _nombre_palabra, int _idtoken, String _valor, String _tipo, String _pertenece_a, Nodo _Anterior) {
         nombre_palabra = _nombre_palabra;
         idtoken = _idtoken;
         valor = _valor;
         tipo = _tipo;
         pertenece_a = _pertenece_a;
         Siguiente = null;
+        Anterior = _Anterior;
     }
     
     //AGREGA PALABRA RESERVADA Y TOKENS
