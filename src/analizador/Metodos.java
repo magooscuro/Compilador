@@ -428,9 +428,16 @@ public class Metodos {
                                 tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Asignador");
                             }else
                                 if(esValor(primero[0])){//los vvalores se insertan
+<<<<<<< HEAD
                                     //if(banderaValor == 1){
                                     tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "valor");
                                     //}
+=======
+                                    if(banderaValor == 1){
+                                        banderaValor = 0;
+                                    tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
+                                    }
+>>>>>>> 9226f7a1aa8d38f8a1e51a15377af20c3d90337a
                                 }else
                                     if(esCondicional(primero[0])){
                                         tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Condicional");
