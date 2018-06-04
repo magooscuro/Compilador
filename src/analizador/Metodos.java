@@ -391,6 +391,7 @@ public class Metodos {
                             }else
                                 if(esValor(primero[0])){//los vvalores se insertan
                                     if(banderaValor == 1){
+                                        banderaValor = 0;
                                     tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
                                     }
                                 }else
