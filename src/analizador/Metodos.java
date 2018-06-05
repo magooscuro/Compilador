@@ -1,5 +1,6 @@
 package analizador;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -247,20 +248,24 @@ public class Metodos {
     }
     //id
     public boolean esIdentificador(String entrada){
-//        String reservadas[] = {"public","static", "void", "main()","int","string","bolean",
-//                                "if","else","double","while","=", "+=", "-=", "+", "-", "*", "/",
-//                                ">", "<", ">=", "<=","!=",";","(",")","{","}",","};
-//        int idtoken[] = {200,201,202,203,204,205,206,207,208,209,210,300,301,302,401,402,403,404,
-//                        500,501,502,503,504,600,601,602,603,604,605};
-        
-        //for (int i = 0; i < 2; i++) {
+
             if(entrada.startsWith("$"))//700
                 return true;
-            else
-            //}/*else{
-                //if(entrada.startsWith(entrada))
-            //}*/
-        //}
+       
+        return false;
+    }
+    
+    public boolean esFuncion(String entrada){
+                String abcedario[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; 
+
+        if(entrada.length() == 1){
+            for (int i = 0; i < abcedario.length; i++) {
+                if(entrada.equalsIgnoreCase(abcedario[i])){
+                    return true;
+                }
+            }
+        }
+        
         
         return false;
     }
@@ -293,7 +298,7 @@ public class Metodos {
     
     public boolean esUnTipoDeDato(String entrada){
         String tiposDeDatos[] = {"int","string","bolean","double"};
-        int idtoken[] = {204,205,206,209};
+        int idtoken[] = {204,205,206,209,202};
         
         for (int i = 0; i <= 3 ; i++) {
             if(tiposDeDatos[i].equals(entrada)){
@@ -385,15 +390,54 @@ public class Metodos {
     
     public void llenarTABLA_DE_SIMBOLOS() throws Exception{
         //LLAMAR A TDA PALABRASTOKES Y PRELLENAR TABLA SIMBOLOS
-        System.out.println("-----------------0");
+        tabla = new ArrayList<>();
         int tamaño = entrada.tamaño();
-        System.out.println("++++ "+ tamaño);
+        
         String[] primero;
         String[] tipoDatoGuardado = new String[2];
         String[] segundo;
+        int contador=0;
         try {
             for (int p=1; p<=tamaño;p++) {
+                contador = 0;
                 primero = entrada.eliminar_cola();
+                if(esUnTipoDeDato(primero[0])){
+                    if(esIdentificador(entrada.Inicio.nombre_palabra)){
+                        if(busqueda1(entrada.Inicio.nombre_palabra)){
+                            tabla.add(entrada.Inicio.nombre_palabra);
+                            tabla_simbolos.insertar_cola(entrada.Inicio.nombre_palabra, entrada.Inicio.idtoken, "", primero[0], "ID");
+                        }else{
+                            tabla_simbolos.insertar_cola(entrada.Inicio.nombre_palabra, entrada.Inicio.idtoken, "Error variable ya declarada", "", "ID");
+                        }
+                    }else{
+                        if(esFuncion(entrada.Inicio.nombre_palabra)){
+                            if(busqueda1(entrada.Inicio.nombre_palabra)){
+                            tabla.add(entrada.Inicio.nombre_palabra);
+                            String data = entrada.Inicio.nombre_palabra;
+                            String tipo = primero[0];
+                            primero = entrada.eliminar_cola();
+                            while(!primero[0].equals(")")){
+                                if(primero[0].equals(",")){
+                                    contador++;
+                                }
+                                primero = entrada.eliminar_cola();
+                            }
+                            tabla_simbolos.insertar_cola(data, 701, "Parametros: "+(contador+1), tipo, "Funcion");
+                        }else{
+                            tabla_simbolos.insertar_cola(entrada.Inicio.nombre_palabra, entrada.Inicio.idtoken, "Error funcion ya declarada", "", "Funcion");
+                        }
+                        }
+                    }
+                }else if(esIdentificador(primero[0])){
+                    if(!busqueda2(primero[0])){
+                        tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "Error variable no declarada", "", "ID");
+                    }
+                }else if(esFuncion(primero[0])){
+                    if(!busqueda2(primero[0])){
+                        tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "Error funcion no declarada", "", "Funcion");
+                    }
+                }
+                
                 /*if(tabla_simbolos.buscar_si_existe(primero[0])){//ACTUALIZA EL VALOR.
                     //RECUPERAR VALORES
 //                    System.out.println("----------1");
@@ -406,50 +450,50 @@ public class Metodos {
 //                        }
                     
                     }else{//INGRESA LA PALABRA*/
-                    if(esReservada(primero[0])){
-                        tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Palabra Reservada");
-                    }else
-                        if(esIdentificador(primero[0])){
+                    //if(esReservada(primero[0])){
+                        //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Palabra Reservada");
+                    ///}else
+                       // if(esIdentificador(primero[0])){
 //                            nombreVariable = primero[0];
 //                            identificador = Integer.parseInt(primero[1]);
 //                            banderaValor = 1;
-                            segundo =entrada.segundoNODO();
-                            if(esValor(segundo[0])){
-                                if(esUnTipoDeDato(tipoDatoGuardado[0])){
-                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], tipoDatoGuardado[0], "Identificador");
-                                }else{
-                                    String[] valores_recuperados = tabla_simbolos.recuperar_valores(primero[0]);
+                         //   segundo =entrada.segundoNODO();
+                           // if(esValor(segundo[0])){
+                             //   if(esUnTipoDeDato(tipoDatoGuardado[0])){
+                               //     tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], tipoDatoGuardado[0], "Identificador");
+                                //}else{
+                                  //  String[] valores_recuperados = tabla_simbolos.recuperar_valores(primero[0]);
         //                          System.out.println(""+valores_recuperados[0]);
-                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], valores_recuperados[3], "Identificador");//""aqui poner tipo de una busqueda a la concurrencia anterior
-                                }
-                            }
-                        }else
-                            if(esAsignador(primero[0])){
-                                tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Asignador");
-                            }else
-                                if(esValor(primero[0])){//los vvalores se insertan
-<<<<<<< HEAD
+                                    //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), segundo[0], valores_recuperados[3], "Identificador");//""aqui poner tipo de una busqueda a la concurrencia anterior
+                                //}
+                            //}
+                        //}else
+                          //  if(esAsignador(primero[0])){
+                                //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Asignador");
+                            //}else
+                              //  if(esValor(primero[0])){//los vvalores se insertan
+
                                     //if(banderaValor == 1){
-                                    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "valor");
+                                //    tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "valor");
                                     //}
-=======
-                                    if(banderaValor == 1){
-                                        banderaValor = 0;
-                                    tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
-                                    }
->>>>>>> 9226f7a1aa8d38f8a1e51a15377af20c3d90337a
-                                }else
-                                    if(esCondicional(primero[0])){
-                                        tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Condicional");
-                                    }else
-                                        if(esOperador(primero[0])){
-                                            tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Operador");
-                                        }else
-                                            if(esUnTipoDeDato(primero[0])){
-                                                tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Tipo de dato");
-                                                tipoDatoGuardado[0]=primero[0];
-                                                tipoDatoGuardado[1]=primero[1];
-                                            }//falta else de error
+
+                                  //  if(banderaValor == 1){
+                                    //    banderaValor = 0;
+                                    //tabla_simbolos.insertar_cola(nombreVariable, identificador, primero[0], "", "variable");
+                                    //}
+
+                                //}else
+                                  //  if(esCondicional(primero[0])){
+                                        //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Condicional");
+                                    //}else
+                                      //  if(esOperador(primero[0])){
+                                           // tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Operador");
+                                        //}else
+                                          //  if(esUnTipoDeDato(primero[0])){
+                                                //tabla_simbolos.insertar_cola(primero[0], Integer.parseInt(primero[1]), "", "", "Tipo de dato");
+                                                //tipoDatoGuardado[0]=primero[0];
+                                                //tipoDatoGuardado[1]=primero[1];
+                                            //}//falta else de error
               //  }//FIN DEL ELSE
             }//FIN DEL WHILE
         } catch (Exception e) {
@@ -458,6 +502,31 @@ public class Metodos {
     }
     //*****************************************************************
     
+    ArrayList<String> tabla;
+    
+    public boolean busqueda1(String string){
+        
+        if(!tabla.isEmpty()){
+            for (int i = 0; i < tabla.size(); i++) {
+                if(string.equals(tabla.get(i))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean busqueda2(String string){
+        
+        if(!tabla.isEmpty()){
+            for (int i = 0; i < tabla.size(); i++) {
+                if(string.equals(tabla.get(i))){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     
     public void agregarApila(int cadena){
         pila.add(cadena);
